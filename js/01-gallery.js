@@ -21,7 +21,7 @@ function createPictureMarkup(galleryItems) {
     data-source="${original}" 
     alt="${description}" />
   </a>
-</div>;
+</div>
     `;
     })
     .join('');
@@ -36,7 +36,7 @@ function onGalleryItemsClick(evt) {
   }
     const currentPicture = evt.target.dataset.source;
   const instance = basicLightbox.create(`
-    <img class="modal_image" src="${currentPicture}"/>
+    <img src="${currentPicture}"/>
 
 `);
 
