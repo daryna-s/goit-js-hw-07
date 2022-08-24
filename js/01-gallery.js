@@ -34,18 +34,14 @@ function onGalleryItemsClick(evt) {
     <img src="${currentPicture}" alt=""/>
 `);
     instance.show();
-    onOpenModal();
-  function onOpenModal() {
-    window.addEventListener('keydown', onCloseModal);
-  }
-  function onCloseModal() {
     window.addEventListener('keydown', onEscKeyPress);
-  }
+
     function onEscKeyPress(event) {
-        event.preventDefault();
+        
         console.log(event.code);
 
         if (event.code === 'Escape') {
+          event.preventDefault();
           instance.close();
           window.removeEventListener('keydown', onEscKeyPress);
         } 
