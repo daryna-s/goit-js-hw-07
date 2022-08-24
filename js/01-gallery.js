@@ -1,15 +1,12 @@
 import { galleryItems } from './gallery-items.js';
-// Change code below this line
+// // Change code below this line
 
-
+console.log(galleryItems);
 
 const galleryContainer = document.querySelector('.gallery');
 const picturesMarkup = createPictureMarkup(galleryItems);
-
 galleryContainer.insertAdjacentHTML('beforeend', picturesMarkup);
-
 galleryContainer.addEventListener('click', onGalleryItemsClick);
-
 
 function createPictureMarkup(galleryItems) {
   return galleryItems
@@ -17,8 +14,8 @@ function createPictureMarkup(galleryItems) {
       return `
    <div class="gallery__item">
   <a class="gallery__link" href="${original}">
-    <img class="gallery__image" src="${preview}" 
-    data-source="${original}" 
+    <img class="gallery__image" src="${preview}"
+    data-source="${original}"
     alt="${description}" />
   </a>
 </div>
@@ -26,21 +23,31 @@ function createPictureMarkup(galleryItems) {
     })
     .join('');
 };
-
 function onGalleryItemsClick(evt) {
-    evt.preventDefault();
-  const isPictureEl = evt.target.classList.contains('gallery__item');
-
+  evt.preventDefault();
+  const isPictureEl = evt.target.classList.contains('gallery__image');
   if (!isPictureEl) {
     return;
   }
-    const currentPicture = evt.target.dataset.source;
+  const currentPicture = evt.target.dataset.source;
   const instance = basicLightbox.create(`
-    <img src="${currentPicture}"/>
-
+    <img src="${currentPicture}" alt=""/>
 `);
+    instance.show();
+    onOpenModal();
+  function onOpenModal() {
+    window.addEventListener('keydown', onCloseModal);
+  }
+  function onCloseModal() {
+    window.addEventListener('keydown', onEscKeyPress);
+  }
+    function onEscKeyPress(event) {
+        event.preventDefault();
+        console.log(event.code);
 
-  instance.show();
+        if (event.code === 'Escape') {
+          instance.close();
+          window.removeEventListener('keydown', onEscKeyPress);
+        } 
+    }
 };
-
-console.log(galleryItems);
