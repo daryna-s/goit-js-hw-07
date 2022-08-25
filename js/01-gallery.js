@@ -41,7 +41,6 @@ function onGalleryItemsClick(evt) {
         console.log(event.code);
 
         if (event.code === 'Escape') {
-          event.preventDefault();
           instance.close();
           window.removeEventListener('keydown', onEscKeyPress);
         } 
